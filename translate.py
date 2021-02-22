@@ -81,8 +81,6 @@ def get_reverse(sequence):
     seq_list.reverse()
     reverse = "".join(seq_list)
     return reverse
- #   revsequence = sequence [::-1]
- #   print (revsequence)
 
 
 def get_complement(sequence):
@@ -97,6 +95,9 @@ def get_complement(sequence):
     >>> get_complement('AUGC')
     'UACG'
     """
+    sequence = sequence.upper()
+    complements = { 'C' : 'G', 'G' : 'C', 'A' : 'U', 'U' : 'A' }
+
     pass
 
 def reverse_and_complement(sequence):
@@ -112,7 +113,9 @@ def reverse_and_complement(sequence):
     >>> reverse_and_complement('AUGC')
     'GCAU'
     """
+
     pass
+
 
 def get_longest_peptide(rna_sequence, genetic_code):
     """Get the longest peptide encoded by an RNA sequence.
