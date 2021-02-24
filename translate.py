@@ -118,7 +118,11 @@ def reverse_and_complement(sequence):
     'GCAU'
     """
 
-    pass
+    sequence = sequence.upper()
+    rev = get_reverse(sequence)
+    revcomp = get_complement(rev)
+    return revcomp
+
 
 
 def get_longest_peptide(rna_sequence, genetic_code):
