@@ -28,7 +28,7 @@ def translate_sequence(rna_sequence, genetic_code):
     str
         A string of the translated amino acids.
     """
-    pass
+
 
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
