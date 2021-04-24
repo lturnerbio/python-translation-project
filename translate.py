@@ -29,6 +29,24 @@ def translate_sequence(rna_sequence, genetic_code):
         A string of the translated amino acids.
     """
 
+    rna_sequence = rna_sequence.upper()
+    rna_list = list(rna_sequence)
+    x = 0
+    codons = ""
+    codon_list = list(codons)
+    while x + 2 < len(rna_list):
+        triplet = rna_list[x] + rna_list[x+1] + rna_list[x+2]
+        codon_list.append(triplet)
+        x = x + 3
+    new = ""
+    for elem in codon_list:
+        if genetic_code[elem] == "*":
+            break
+        else:
+            new = new + genetic_code[elem]
+    return new
+
+
 
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
@@ -61,7 +79,24 @@ def get_all_translations(rna_sequence, genetic_code):
         A list of strings; each string is an sequence of amino acids encoded by
         `rna_sequence`.
     """
-    pass
+
+    rna_sequence = rna_sequence.upper()
+    bases = len(rna_sequence)
+    last_codon = bases - 3
+    if last_codon < 0:
+        return []
+    amino_acid_seq = []
+    for i in range(last_codon + 1):
+        codon = rna_sequence[i: i + 3]
+        if codon == "AUG":
+            aa_seq = translate_sequence(
+                rna_sequence = rna_sequence[i:],
+                genetic_code = genetic_code
+            )
+            if aa_seq:
+                amino_acid_seq.append(aa_seq)
+    return amino_acid_seq
+
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
@@ -152,7 +187,18 @@ def get_longest_peptide(rna_sequence, genetic_code):
         A string of the longest sequence of amino acids encoded by
         `rna_sequence`.
     """
-    pass
+
+    forward = rna_sequence
+    revcomp = reverse_and_complement(rna_sequence)
+    forward_translations = get_all_translations(forward, genetic_code)
+    revcomp_translations = get_all_translations(revcomp, genetic_code)
+    all_translations = forward_translations + revcomp_translations
+    if all_translations == []:
+        longest_peptide = ""
+    else:
+        longest_peptide = max(all_translations, key=len)
+    return longest_peptide
+
 
 
 if __name__ == '__main__':
