@@ -31,19 +31,19 @@ def translate_sequence(rna_sequence, genetic_code):
 
     rna_sequence = rna_sequence.upper()
     rna_list = list(rna_sequence)
-    x = 0
+    i = 0
     codons = ""
     codon_list = list(codons)
-    while x + 2 < len(rna_list):
-        triplet = rna_list[x] + rna_list[x+1] + rna_list[x+2]
+    while i + 2 < len(rna_list):
+        triplet = rna_list[i] + rna_list[i+1] + rna_list[i+2]
         codon_list.append(triplet)
-        x = x + 3
+        i = i + 3
     new = ""
-    for elem in codon_list:
-        if genetic_code[elem] == "*":
+    for var in codon_list:
+        if genetic_code[var] == "*":
             break
         else:
-            new = new + genetic_code[elem]
+            new = new + genetic_code[var]
     return new
 
 
@@ -81,8 +81,8 @@ def get_all_translations(rna_sequence, genetic_code):
     """
 
     rna_sequence = rna_sequence.upper()
-    bases = len(rna_sequence)
-    last_codon = bases - 3
+    num_bases = len(rna_sequence)
+    last_codon = num_bases - 3
     if last_codon < 0:
         return []
     amino_acid_seq = []
